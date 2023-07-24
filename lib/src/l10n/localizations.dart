@@ -1907,53 +1907,6 @@ class CupertinoLocalizationRo extends GlobalCupertinoLocalizations {
   }
 }
 
-/// The translations for Russian (`ru`).
-class CupertinoLocalizationRu extends GlobalCupertinoLocalizations {
-  CupertinoLocalizationRu({@required Locale locale}) : super(locale: locale);
-
-  @override
-  DatePickerDateOrder get datePickerDateOrder => DatePickerDateOrder.mdy;
-
-  @override
-  DatePickerDateTimeOrder get datePickerDateTimeOrder => DatePickerDateTimeOrder.date_time_dayPeriod;
-
-  @override
-  String datePickerHourSemanticsLabel(int hour) {
-    // TODO: implement datePickerHourSemanticsLabel
-    return null;
-  }
-
-  @override
-  String datePickerMinute(int minute) {
-    // TODO: implement datePickerMinute
-    return null;
-  }
-
-  @override
-  String datePickerMinuteSemanticsLabel(int minute) {
-    // TODO: implement datePickerMinuteSemanticsLabel
-    return null;
-  }
-
-  @override
-  String timerPickerHourLabel(int hour) {
-    // TODO: implement timerPickerHourLabel
-    return null;
-  }
-
-  @override
-  String timerPickerMinuteLabel(int minute) {
-    // TODO: implement timerPickerMinuteLabel
-    return null;
-  }
-
-  @override
-  String timerPickerSecondLabel(int second) {
-    // TODO: implement timerPickerSecondLabel
-    return null;
-  }
-}
-
 /// The translations for Slovak (`sk`).
 class CupertinoLocalizationSk extends GlobalCupertinoLocalizations {
   CupertinoLocalizationSk({@required Locale locale}) : super(locale: locale);
@@ -2344,6 +2297,86 @@ class CupertinoLocalizationTr extends GlobalCupertinoLocalizations {
 class CupertinoLocalizationUk extends GlobalCupertinoLocalizations {
   CupertinoLocalizationUk({@required Locale locale}) : super(locale: locale);
 
+  static const List<String> _shortWeekdays = <String>[
+    'Пн',
+    'Вт',
+    'Ср',
+    'Чт',
+    'Пт',
+    'Сб',
+    'Нд',
+  ];
+
+  static const List<String> _shortMonths = <String>[
+    'Січ',
+    'Лют',
+    'Берез',
+    'Квіт',
+    'Трав',
+    'Черв',
+    'Лип',
+    'Серп',
+    'Верес',
+    'Жовт',
+    'Листоп',
+    'Груд',
+  ];
+
+  static const List<String> _months = <String>[
+    'Січень',
+    'Лютий',
+    'Березень',
+    'Квітень',
+    'Травень',
+    'Червень',
+    'Липень',
+    'Серпень',
+    'Вересень',
+    'Жовтень',
+    'Листопад',
+    'Грудень',
+  ];
+
+  @override
+  String datePickerYear(int yearIndex) => yearIndex.toString();
+
+  @override
+  String datePickerMonth(int monthIndex) => _months[monthIndex - 1];
+
+  @override
+  String datePickerDayOfMonth(int dayIndex) => dayIndex.toString();
+
+  @override
+  String datePickerHour(int hour) => hour.toString();
+
+  @override
+  String datePickerHourSemanticsLabel(int hour) => hour.toString() + " годин";
+
+  @override
+  String datePickerMinute(int minute) => minute.toString().padLeft(2, '0');
+
+  @override
+  String datePickerMinuteSemanticsLabel(int minute) {
+    final num lastUnit = minute % 10;
+    switch (lastUnit) {
+      case 1:
+        return '$minute хвилина';
+      case 2:
+      case 3:
+      case 4:
+        return '$minute хвилини';
+      default:
+        return '$minute хвилин';
+    }
+  }
+
+  @override
+  String datePickerMediumDate(DateTime date) {
+    return '${_shortWeekdays[date.weekday - DateTime.monday]} '
+        '${_shortMonths[date.month - DateTime.january]} '
+        '${date.day.toString().padRight(2)}';
+  }
+
   @override
   DatePickerDateOrder get datePickerDateOrder => DatePickerDateOrder.mdy;
 
@@ -2351,40 +2384,39 @@ class CupertinoLocalizationUk extends GlobalCupertinoLocalizations {
   DatePickerDateTimeOrder get datePickerDateTimeOrder => DatePickerDateTimeOrder.date_time_dayPeriod;
 
   @override
-  String datePickerHourSemanticsLabel(int hour) {
-    // TODO: implement datePickerHourSemanticsLabel
-    return null;
-  }
+  String timerPickerHour(int hour) => hour.toString();
 
   @override
-  String datePickerMinute(int minute) {
-    // TODO: implement datePickerMinute
-    return null;
-  }
+  String timerPickerMinute(int minute) => minute.toString();
 
   @override
-  String datePickerMinuteSemanticsLabel(int minute) {
-    // TODO: implement datePickerMinuteSemanticsLabel
-    return null;
-  }
+  String timerPickerSecond(int second) => second.toString();
 
   @override
   String timerPickerHourLabel(int hour) {
-    // TODO: implement timerPickerHourLabel
-    return null;
+    num lastUnit = hour % 10;
+
+    if (hour > 10 && hour < 15) {
+      lastUnit = 0;
+    }
+
+    switch (lastUnit) {
+      case 1:
+        return '$hour година';
+      case 2:
+      case 3:
+      case 4:
+        return '$hour години';
+      default:
+        return '$hour годин';
+    }
   }
 
   @override
-  String timerPickerMinuteLabel(int minute) {
-    // TODO: implement timerPickerMinuteLabel
-    return null;
-  }
+  String timerPickerMinuteLabel(int minute) => 'хв';
 
   @override
-  String timerPickerSecondLabel(int second) {
-    // TODO: implement timerPickerSecondLabel
-    return null;
-  }
+  String timerPickerSecondLabel(int second) => 'с';
 }
 
 /// The translations for Urdu (`ur`).
@@ -2821,8 +2853,6 @@ GlobalCupertinoLocalizations getCupertinoTranslation(
       }
     case 'ro':
       return CupertinoLocalizationRo(locale: locale);
-    case 'ru':
-      return CupertinoLocalizationRu(locale: locale);
     case 'sk':
       return CupertinoLocalizationSk(locale: locale);
     case 'sl':

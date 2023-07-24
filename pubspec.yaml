@@ -1,11 +1,11 @@
-name: flutter_cupertino_localizations
-description: flutter_cupertino_localizations
-version: 1.0.1
-author: cRazyx <crz365966834@qq.com>
-homepage: https://github.com/crazy365966834/flutter_cupertino_localizations
+name: flutter_cupertino_localizations_nomad483
+description: flutter_cupertino_localizations_nomad483
+version: 1.0.2
+author: nomad483
+homepage: https://github.com/nomad483/flutter_cupertino_localizations
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.0.0-dev.68.0 <3.0.7"
 dependencies:
   flutter:
     sdk: flutter
